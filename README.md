@@ -5,7 +5,7 @@
 * **Neptun kód:** BX8WE0
 * **Szak / Képzés:** Programtervező informatikus BSc (ELTE IK)
 * **Bemutató videó linkje (OneDrive):** [Videó megtekintése](https://ikelte-my.sharepoint.com/:v:/g/personal/bx8we0_inf_elte_hu/IQATXXh-6rr5SL0E9Wp4U1l3AfouBSWFNywsLv3KR9WG_Ig)
-* **A futtatható program linkje (Vercel, Netlify, Firebase, stb.):** https://github.com/EmikoDelfini/Beadando.git
+* **A futtatható program linkje (Vercel, Netlify, Firebase, stb.):** [https://github.com/EmikoDelfini/Beadando.git](https://emikodelfini.github.io/Beadando/)
 ---
 
 ## Hallgatói Nyilatkozat és AI Használat
