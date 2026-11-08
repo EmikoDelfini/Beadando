@@ -1,0 +1,96 @@
+/* Egyszerű, áttekinthető megjelenés. Nincs külső CSS keretrendszer. */
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, sans-serif; background: #f6f1fa; color: #222; }
+.app-shell { max-width: 1160px; margin: 20px auto; background: white; border: 1px solid #bfc8d2; }
+.topbar { background: #66529b; color: white; padding: 18px 22px; display: flex; justify-content: space-between; align-items: center; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-icon { font-size: 28px; }
+.brand h1 { font-size: 23px; margin: 0 0 5px; }
+.brand p { margin: 0; font-size: 13px; color: #f9e7fa; }
+.top-meta { font-size: 12px; color: #f9e7fa; }
+.eyebrow { display: none; }
+.status-dot,.live-dot { display: inline-block; width: 8px; height: 8px; background: #42b477; border-radius: 50%; margin-right: 5px; }
+.screen { padding: 20px; }
+.hidden { display: none !important; }
+.hero { padding: 16px 20px; background: #fce9f5; border: 1px solid #e8b9db; margin-bottom: 16px; }
+.hero h2 { font-size: 23px; margin: 5px 0 9px; }
+.hero h2 em { font-style: normal; color: #7254b5; }
+.hero p { font-size: 14px; line-height: 1.5; margin: 0; }
+.hero-art,.hero-stats,.step-number,.kicker { display: none; }
+.menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.panel { border: 1px solid #d7c6e6; background: #fffcff; padding: 16px; margin-bottom: 16px; }
+.panel-heading { margin-bottom: 14px; }
+.panel h3 { margin: 0; font-size: 18px; color: #684ca0; }
+form { display: grid; gap: 9px; }
+label { font-size: 14px; font-weight: bold; }
+input,select { width: 100%; padding: 9px; border: 1px solid #b9a9d2; border-radius: 3px; background: white; color: #222; font: inherit; }
+button { cursor: pointer; font: inherit; }
+.btn { background: #f0e8f9; color: #222; border: 1px solid #a69bc5; border-radius: 3px; padding: 9px 13px; font-size: 14px; }
+.btn:hover,.tab:hover { background: #e9dcfa; }
+.btn-primary { background: #2878e8; color: white; border-color: #205ec0; }
+.btn-primary:hover { background: #205ec0; }
+.btn-wide { width: 100%; margin-top: 6px; }
+.btn-quiet,.btn-secondary { background: #f4edfc; }
+.small-note { color: #6e6483; font-size: 12px; line-height: 1.5; }
+.guide-list { display: grid; gap: 12px; }
+.guide-row { display: flex; align-items: flex-start; gap: 10px; }
+.guide-icon { min-width: 32px; height: 32px; border: 1px solid #d9c6e8; background: #f8eafa; display: grid; place-items: center; }
+.guide-row b { font-size: 14px; }
+.guide-row p { margin: 4px 0 0; font-size: 13px; line-height: 1.4; }
+.rule-note { margin-top: 15px; background: #fff3bd; border: 1px solid #e6c95f; padding: 10px; font-size: 13px; }
+.leader-tabs { display: flex; gap: 8px; margin-bottom: 10px; }
+.tab { padding: 8px 14px; border: 1px solid #b9a9d2; background: #f6f1fa; }
+.tab.active { background: #2878e8; color: white; }
+.leaderboard-content { font-size: 13px; }
+.leader-row { display: grid; grid-template-columns: 45px 1fr 100px 70px; border-bottom: 1px solid #ddd; padding: 9px 4px; gap: 10px; }
+.game-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+.game-toolbar h2 { font-size: 21px; margin: 0 0 6px; }
+.game-toolbar p { margin: 0; font-size: 13px; }
+.hud { display: flex; gap: 8px; }
+.hud-card { background: #fce9f5; border: 1px solid #d5b9e7; padding: 10px; min-width: 100px; }
+.hud-card span { display: block; font-size: 11px; margin-bottom: 4px; }
+.hud-card b { font-size: 18px; }
+.game-controls { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 16px 0; padding: 10px; border: 1px solid #d7c6e6; background: #f7eefa; }
+.control-hint { font-size: 13px; }
+.control-buttons { display: flex; flex-wrap: wrap; gap: 7px; }
+.canvas-wrap { padding: 10px; border: 1px solid #c6b5df; background: #f9f3ff; }
+.canvas-topline { font-size: 12px; color: #695584; display: flex; justify-content: space-between; padding-bottom: 8px; }
+.canvas-topline i { display: none; }
+canvas { display: block; width: 100%; height: auto; background: #080d17; border: 1px solid #475568; }
+.canvas-legend { display: flex; gap: 16px; flex-wrap: wrap; padding: 10px 0 0; font-size: 12px; }
+.canvas-legend i { display: inline-block; width: 14px; height: 6px; margin-right: 4px; vertical-align: middle; }
+.legend-track { background: #9aa9d7; }.legend-green { background: #36c99b; }.legend-red { background: #f05260; }.legend-yellow { background: #f0c44f; }.legend-train { background: #2878e8; }
+.bottom-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; margin-top: 16px; }
+.event-log { max-height: 135px; min-height: 110px; overflow-y: auto; }
+.log-entry { margin: 5px 0; padding: 5px; font-size: 12px; border-left: 3px solid #7f9dbb; }
+.log-entry.warn { border-color: #e4b33e; }.log-entry.danger { border-color: #d9534f; }.log-entry.good { border-color: #35a76c; }
+.log-time { margin-right: 8px; color: #657484; }
+.log-muted { font-size: 13px; color: #667; }
+.live-pill { font-size: 11px; color: #27734e; }
+.control-panel p { font-size: 13px; }
+kbd { background: #f0e7fb; border: 1px solid #c8b7e0; padding: 3px 5px; }
+.modal { position: fixed; inset: 0; background: #0009; display: grid; place-items: center; padding: 15px; }
+.modal-card { background: white; color: #222; border: 2px solid #745ac0; padding: 24px; width: min(420px,100%); text-align: center; }
+.result-symbol { font-size: 30px; color: #2b9b65; }.result-symbol.fail { color: #cc3e42; }
+.modal-card h2 { margin: 9px 0; }.modal-card p { font-size: 14px; line-height: 1.5; }
+.result-stats { display: flex; justify-content: center; gap: 20px; margin: 18px 0; }
+.result-stats div { display: grid; gap: 5px; }.result-stats span { font-size: 11px; }
+.modal-actions { display: flex; justify-content: center; gap: 8px; }
+footer { display: flex; justify-content: space-between; gap: 10px; border-top: 1px solid #e1d3ed; padding: 14px 20px; color: #667; font-size: 11px; }
+@media (max-width: 800px) { .app-shell { margin: 0; } .menu-grid,.bottom-grid { grid-template-columns: 1fr; } .game-toolbar,.game-controls { flex-direction: column; align-items: stretch; } .hud { flex-wrap: wrap; } .top-meta { display: none; } footer { flex-direction: column; } }
+
+/* Pasztell rózsaszín, kék, sárga és lila színvilág. */
+.topbar { background: #6953a4; }
+.btn-primary,.tab.active { background: #2878e8; border-color: #205ec0; }
+.btn-primary:hover { background: #205ec0; }
+.btn:focus-visible,.tab:focus-visible { outline: 3px solid #f1c34e; outline-offset: 2px; }
+.hero { background: #fce7f4; }
+.hud-card { background: #fff0bb; border-color: #e6cb72; }
+.canvas-stage { position: relative; }
+.pause-cover { position: absolute; inset: 0; background: #66529b; color: #fff; display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center; z-index: 2; }
+.pause-message { max-width: 390px; background: #fff5c7; border: 3px solid #e6b94e; color: #43376c; padding: 24px; }
+.pause-message h2 { font-size: 30px; margin: 0 0 12px; }
+.pause-message p { font-size: 15px; line-height: 1.5; }
+/* Szünetben az eseménynapló sem árulja el a vonatok helyzetét. */
+.game-screen.is-paused .event-log { visibility: hidden; }
+.game-screen.is-paused .canvas-legend { visibility: hidden; }

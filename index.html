@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vasúti forgalomirányító és váltóállomás szimulátor">
+  <title>Vasúti Forgalomirányító Szimulátor</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./js/app.js"></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-icon">🚆</span><div><h1>Vasúti Forgalomirányító</h1><p>Váltóállomás-szimulátor</p></div></div>
+      <div class="top-meta"><span class="eyebrow">ELTE IK · KLIENSOLDALI WEBPROGRAMOZÁS</span><span class="status-dot"></span><span>Helyi szimuláció</span></div>
+    </header>
+
+    <section id="menu-screen" class="screen menu-screen">
+      <div class="hero">
+        <div class="hero-copy">
+          <span class="kicker">VASÚTI SZIMULÁTOR</span>
+          <h2>Irányítsd a forgalmat.<br><em>Előzd meg a balesetet.</em></h2>
+          <p>A váltók és jelzők a te kezedben vannak. Juttasd el a szerelvényeket a megfelelő peronra, pontosan és biztonságosan.</p>
+          
+        </div>
+
+      </div>
+
+      <div class="menu-grid">
+        <section class="panel launch-panel">
+          <div class="panel-heading"><div><span class="kicker">ÚJ MENET</span><h3>Új játék indítása</h3></div><span class="step-number">01</span></div>
+          <form id="start-form">
+            <label for="player-name">Diszpécser neve</label>
+            <input id="player-name" name="player" type="text" maxlength="24" placeholder="Add meg a neved..." required autocomplete="name">
+            <label for="level-select">Pálya kiválasztása</label>
+            <select id="level-select" name="level">
+              <option value="1">1. szint – Könnyű</option>
+              <option value="2">2. szint – Közepes</option>
+              <option value="3">3. szint – Nehéz</option>
+            </select>
+            <button class="btn btn-primary btn-wide" type="submit">▶ Szimuláció indítása <span>→</span></button>
+          </form>
+          <button id="load-menu" class="btn btn-quiet btn-wide">▣ Mentett játékállás betöltése</button>
+          <p id="save-status" class="small-note" aria-live="polite">A mentés a böngésző helyi tárhelyén tárolódik.</p>
+        </section>
+
+        <section class="panel guide-panel">
+          <div class="panel-heading"><div><span class="kicker">GYORS ÚTMUTATÓ</span><h3>Játékszabályok</h3></div><span class="step-number">02</span></div>
+          <div class="guide-list">
+            <div class="guide-row"><span class="guide-icon">↗</span><div><b>Váltóállítás</b><p>Bal kattintás a kör alakú váltón: válts a következő vágányágra.</p></div></div>
+            <div class="guide-row"><span class="guide-icon">🚦</span><div><b>Fényjelző</b><p>Bal kattintás a jelzőn: vörös és zöld állapot között vált.</p></div></div>
+            <div class="guide-row"><span class="guide-icon">Ⅱ</span><div><b>Vészfék</b><p>Jobb kattintás a vonaton: fék be/ki. A böngészőmenü tiltva.</p></div></div>
+            <div class="guide-row"><span class="guide-icon">!</span><div><b>Biztonság</b><p>Tartsd a jelzőket és figyeld a sárga ütközésveszély-jelzést.</p></div></div>
+          </div>
+          <div class="rule-note"><b>Alapszabály:</b> vörös jelző előtt a vonat megáll. Csak szabad jelzés esetén engedd tovább! A jelzők kezdetben pirosak, és minden áthaladó vonat után újra pirosra váltanak.</div>
+        </section>
+      </div>
+
+      <section class="panel leaderboard-panel">
+        <div class="panel-heading"><div><span class="kicker">DISZPÉCSEREK DICSŐSÉGKÖNYVE</span><h3>Helyi ranglista</h3></div><span class="step-number">03</span></div>
+        <div class="leader-tabs" role="group" aria-label="Ranglista pályaválasztó">
+          <button class="tab active" data-board="1">Könnyű</button><button class="tab" data-board="2">Közepes</button><button class="tab" data-board="3">Nehéz</button>
+        </div>
+        <div id="leaderboard" class="leaderboard-content"></div>
+      </section>
+    </section>
+
+    <section id="game-screen" class="screen game-screen hidden">
+      <div class="game-toolbar">
+        <div><span class="kicker">AKTÍV FORGALOMIRÁNYÍTÁS</span><h2 id="game-level-title">1. szint – Könnyű</h2><p id="game-player">Diszpécser: —</p></div>
+        <div class="hud">
+          <div class="hud-card"><span>IDŐ</span><b id="timer">00:00</b></div>
+          <div class="hud-card"><span>CÉLBA ÉRT</span><b id="arrived">0 / 4</b></div>
+          <div class="hud-card"><span>HIBA / KÉSÉS</span><b id="errors">0 / 0</b></div>
+        </div>
+      </div>
+      <div class="game-controls">
+        <div class="control-hint"><span class="live-dot"></span><span id="run-state">Szimuláció készen áll</span></div>
+        <div class="control-buttons">
+          <button id="pause-btn" class="btn btn-secondary">Ⅱ Szünet</button>
+          <button id="reset-btn" class="btn btn-quiet">↻ Újraindítás</button>
+          <button id="save-btn" class="btn btn-quiet">▣ Mentés</button>
+          <button id="home-btn" class="btn btn-quiet">⌂ Főmenü</button>
+        </div>
+      </div>
+      <div class="canvas-wrap">
+        <div class="canvas-topline"><span><i></i> ÉLŐ PÁLYARAJZ</span><span>CANVAS 2D · 60 FPS</span></div>
+        <div class="canvas-stage">
+          <canvas id="rail-canvas" width="1100" height="570" aria-label="Vasúti vágányhálózat. Bal kattintás váltó vagy jelző állításához, jobb kattintás vonat fékezéséhez."></canvas>
+          <div id="pause-cover" class="pause-cover hidden" aria-live="polite">
+            <div class="pause-message"><h2>⏸ Szünet</h2><p>A pálya szünet alatt nem látható.</p><p>A folytatáshoz kattints a <strong>Folytatás</strong> gombra, vagy nyomd meg a szóközt.</p></div>
+          </div>
+        </div>
+        <div class="canvas-legend"><span><i class="legend-track"></i> Vágány</span><span><i class="legend-green"></i> Szabad jelző</span><span><i class="legend-red"></i> Tilos jelző</span><span><i class="legend-yellow"></i> Váltó</span><span><i class="legend-train"></i> Szerelvény</span></div>
+      </div>
+      <div class="bottom-grid">
+        <section class="panel event-panel"><div class="panel-heading"><div><span class="kicker">FORGALMI NAPLÓ</span><h3>Események és figyelmeztetések</h3></div><span class="live-pill">LIVE</span></div><div id="event-log" class="event-log" aria-live="polite"><p class="log-muted">A szimuláció eseményei itt jelennek meg.</p></div></section>
+        <section class="panel control-panel"><div class="panel-heading"><div><span class="kicker">IRÁNYÍTÁSI SEGÉDLET</span><h3>Gyors vezérlés</h3></div></div><p><kbd>Bal kattintás</kbd> váltó / jelző kapcsolása</p><p><kbd>Jobb kattintás</kbd> vonat vészfékezése</p><p><kbd>Space</kbd> szünet / folytatás</p><p class="small-note">A vonatok a menetrend szerint érkeznek. A váltó helyes állása határozza meg a továbbhaladási útvonalat.</p></section>
+      </div>
+    </section>
+
+    <div id="result-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="result-title">
+      <div class="modal-card"><div id="result-symbol" class="result-symbol">✓</div><span class="kicker">FORGALMI JELENTÉS</span><h2 id="result-title">Sikeres teljesítés</h2><p id="result-message"></p><div id="result-stats" class="result-stats"></div><div class="modal-actions"><button id="again-btn" class="btn btn-primary">Új menet</button><button id="modal-home-btn" class="btn btn-quiet">Főmenü</button></div></div>
+    </div>
+    <footer><span>VASÚTI FORGALOMIRÁNYÍTÓ SZIMULÁTOR</span><span>ELTE IK · 2026 ŐSZ · KLIENSOLDALI WEBPROGRAMOZÁS</span></footer>
+  </main>
+</body>
+</html>
